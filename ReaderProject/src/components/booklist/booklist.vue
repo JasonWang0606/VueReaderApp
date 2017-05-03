@@ -1,7 +1,7 @@
 <template>
   <div class="book-list">
     <ul>
-      <li v-for="(item,index) in listdata" v-if="">
+      <li v-for="(item, index) in listdata" v-if="index<shownum">
         <div class="book-h5 clearfix">
           <a href="#">
             <div class="book-h5__cover">
@@ -13,7 +13,7 @@
               <p class="author">{{item.authors}}</p>
               <p class="summary">{{item.summary}}</p>
               <div class="book-h5__wrap" v-if="serial">
-                <div class="tag" v-for="tag in item.tags">{{tag}}</div>
+                <div class="tag" v-for="(tag, index) in item.tags" v-if="index<6">{{tag}}</div>
               </div>
             </div>
           </a>
@@ -31,6 +31,9 @@
         },
         serial: {
           type: Boolean
+        },
+        shownum: {
+          type: Number
         }
       }
     }
@@ -45,6 +48,9 @@
     padding: 17px 0;
     overflow: hidden;
     border-bottom: 1px solid #f0f0f0;
+  }
+  .book-list ul li:last-child{
+    border-bottom: none;
   }
   .book-h5{
     overflow: hidden;

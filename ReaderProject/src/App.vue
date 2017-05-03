@@ -13,7 +13,7 @@
       </div>
     </div>
     <keep-alive>
-      <router-view :homedata="homedata" :top="top" :hot="hot"></router-view>
+      <router-view :homedata="homedata" :top="top" :hot="hot" :malelove="malelove" :femalelove="femalelove" :malechanneldata="malechanneldata" :femalechanneldata="femalechanneldata"></router-view>
     </keep-alive>
   </div>
 </template>
@@ -29,7 +29,11 @@
       return {
         homedata: {},
         hot: [],
-        top: []
+        top: [],
+        malelove: [],
+        femalelove: [],
+        malechanneldata: {},
+        femalechanneldata: {}
       }
     },
     created () {
@@ -39,6 +43,20 @@
           this.homedata = response.data
           this.top = response.data.items[0].data.data[0]
           this.hot = response.data.items[1].data.data
+          this.femalelove = response.data.items[3].data.data
+          this.malelove = response.data.items[4].data.data
+        }
+      })
+      this.$http.get('/api/male').then(function (res) {
+        let response = res.data
+        if (response.errno === ERR_OK) {
+          this.malechanneldata = response.data
+        }
+      })
+      this.$http.get('/api/female').then(function (res) {
+        let response = res.data
+        if (response.errno === ERR_OK) {
+          this.femalechanneldata = response.data
         }
       })
     },

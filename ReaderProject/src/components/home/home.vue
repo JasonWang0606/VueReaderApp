@@ -34,11 +34,21 @@
     </div>
     <split></split>
     <div class="channel-title"><p class="title">本周最火</p></div>
-    <booklist :listdata="hot" :serial="true"></booklist>
-    <split></split>
-    <div class="channel-title"><p class="title">男生最爱</p></div>
+    <booklist :listdata="hot" :serial="true" :shownum="5"></booklist>
     <split></split>
     <div class="channel-title"><p class="title">女生最爱</p></div>
+    <booklist :listdata="femalelove" :serial="false" :shownum="shownum"></booklist>
+    <div class="channel-footer">
+      <a class="next-btn" href="javascrit:">换一换</a>
+      <router-link to="/female" class="more-btn">女生频道>></router-link>
+    </div>
+    <split></split>
+    <div class="channel-title"><p class="title">男生最爱</p></div>
+    <booklist :listdata="malelove" :serial="false" :shownum="shownum"></booklist>
+    <div class="channel-footer">
+      <a class="next-btn" href="javascrit:">换一换</a>
+      <router-link to="/male" class="more-btn">男生频道>></router-link>
+    </div>
     <split></split>
   </div>
 </template>
@@ -49,6 +59,12 @@
   import booklist from '../booklist/booklist.vue'
 
   export default {
+    data () {
+      return {
+        serial: false,
+        shownum: 3
+      }
+    },
     props: {
       homedata: {
         type: Object
@@ -57,6 +73,12 @@
         type: Array
       },
       top: {
+        type: Array
+      },
+      malelove: {
+        type: Array
+      },
+      femalelove: {
         type: Array
       }
     },
@@ -101,5 +123,21 @@
     position: relative;
     font: bold 13px/13px a;
     color: rbga(0, 0, 0, 0.9);
+  }
+  .home .channel-footer{
+    overflow: hidden;
+    border-top: 1px solid #f0f0f0;
+  }
+  .home .channel-footer a{
+    float: left;
+    padding: 14px;
+    width: 50%;
+    font: 13px/1.3em a;
+    color: #333;
+    text-align: center;
+    box-sizing: border-box;
+  }
+  .home .channel-footer a:first-child{
+    border-right: 1px solid #f0f0f0;
   }
 </style>
