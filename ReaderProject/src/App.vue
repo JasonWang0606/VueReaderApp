@@ -13,7 +13,7 @@
       </div>
     </div>
     <keep-alive>
-      <router-view :homedata="homedata" :top="top" :hot="hot" :malelove="malelove" :femalelove="femalelove" :malechanneldata="malechanneldata" :femalechanneldata="femalechanneldata"></router-view>
+      <router-view :homedata="homedata" :top="top" :hot="hot" :malelove="malelove" :femalelove="femalelove" :malechanneldata="malechanneldata" :femalechanneldata="femalechanneldata" :categorychanneldata="categorychanneldata"></router-view>
     </keep-alive>
   </div>
 </template>
@@ -29,11 +29,12 @@
       return {
         homedata: {},
         hot: [],
-        top: [],
+        top: {},
         malelove: [],
         femalelove: [],
         malechanneldata: {},
-        femalechanneldata: {}
+        femalechanneldata: {},
+        categorychanneldata: {}
       }
     },
     created () {
@@ -59,6 +60,13 @@
           this.femalechanneldata = response.data
         }
       })
+      this.$http.get('/api/category').then(function (res) {
+        let response = res.data
+        if (response.errno === ERR_OK) {
+          this.categorychanneldata = response.data
+          console.log(this.categorychanneldata)
+        }
+      })
     },
     name: 'app',
     components: {
@@ -69,8 +77,15 @@
 </script>
 
 <style>
+  #app{
+    padding-top: 45px;
+  }
   .header{
-    position: relative;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
     line-height: 45px;
     height: 45px;
     background: #efeff0;

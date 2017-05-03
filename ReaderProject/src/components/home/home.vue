@@ -73,7 +73,7 @@
         type: Array
       },
       top: {
-        type: Array
+        type: Object
       },
       malelove: {
         type: Array
