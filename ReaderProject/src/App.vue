@@ -12,7 +12,9 @@
         </div>
       </div>
     </div>
-    <router-view :homedata="homedata"></router-view>
+    <keep-alive>
+      <router-view :homedata="homedata" :top="top" :hot="hot"></router-view>
+    </keep-alive>
   </div>
 </template>
 
@@ -25,14 +27,18 @@
   export default {
     data () {
       return {
-        homedata: {}
+        homedata: {},
+        hot: [],
+        top: []
       }
     },
     created () {
       this.$http.get('/api/home').then(function (res) {
-        let response = res.body
+        let response = res.data
         if (response.errno === ERR_OK) {
           this.homedata = response.data
+          this.top = response.data.items[0].data.data[0]
+          this.hot = response.data.items[1].data.data
         }
       })
     },

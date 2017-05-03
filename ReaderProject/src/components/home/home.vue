@@ -3,35 +3,42 @@
     <searchview></searchview>
     <div class="slider-banner">
       <a href="http://dushu.xiaomi.com/#page=channel&id=410">
-        <img class="cover" :src="homedata.items[0].data.data[0].ad_pic_url">
+        <img class="cover" :src="top.ad_pic_url">
       </a>
     </div>
     <div class="nav">
       <div class="nav-tab">
-        <a>
+        <router-link to="male">
           <img class="nav-icon" src="./male.png">
           <p class="title">男生</p>
-        </a>
+        </router-link>
       </div>
       <div class="nav-tab">
-        <a>
+        <router-link to="female">
           <img class="nav-icon" src="./female.png">
           <p class="title">女生</p>
-        </a>
+        </router-link>
       </div>
       <div class="nav-tab">
-        <a>
+        <router-link to="/category">
           <img class="nav-icon" src="./category.png">
           <p class="title">分类</p>
-        </a>
+        </router-link>
       </div>
       <div class="nav-tab">
-        <a>
+        <router-link to="/rank">
           <img class="nav-icon" src="./rank.png">
           <p class="title">排行</p>
-        </a>
+        </router-link>
       </div>
     </div>
+    <split></split>
+    <div class="channel-title"><p class="title">本周最火</p></div>
+    <booklist :listdata="hot" :serial="true"></booklist>
+    <split></split>
+    <div class="channel-title"><p class="title">男生最爱</p></div>
+    <split></split>
+    <div class="channel-title"><p class="title">女生最爱</p></div>
     <split></split>
   </div>
 </template>
@@ -39,15 +46,24 @@
 <script type="text/ecmascript-6">
   import searchview from '../searchview/searchview.vue'
   import split from '../split/split.vue'
+  import booklist from '../booklist/booklist.vue'
+
   export default {
     props: {
       homedata: {
         type: Object
+      },
+      hot: {
+        type: Array
+      },
+      top: {
+        type: Array
       }
     },
     components: {
       searchview,
-      split
+      split,
+      booklist
     }
   }
 </script>
@@ -75,5 +91,15 @@
   }
   .home .nav .nav-tab .title{
     color: #333;
+  }
+  .home .channel-title{
+    padding: 15px 13px 13px 14px;
+    border-bottom: 1px solid #f0f0f0;
+    position: relative;
+  }
+  .home .channel-title .title{
+    position: relative;
+    font: bold 13px/13px a;
+    color: rbga(0, 0, 0, 0.9);
   }
 </style>
