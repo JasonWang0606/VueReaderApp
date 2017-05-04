@@ -13,7 +13,7 @@
       </div>
     </div>
     <keep-alive>
-      <router-view :homedata="homedata" :top="top" :hot="hot" :malelove="malelove" :femalelove="femalelove" :malechanneldata="malechanneldata" :femalechanneldata="femalechanneldata" :categorychanneldata="categorychanneldata"></router-view>
+      <router-view :homedata="homedata" :top="top" :hot="hot" :malelove="malelove" :femalelove="femalelove" :malechanneldata="malechanneldata" :femalechanneldata="femalechanneldata" :categorychanneldata="categorychanneldata" :rankchanneldata="rankchanneldata"></router-view>
     </keep-alive>
   </div>
 </template>
@@ -34,7 +34,8 @@
         femalelove: [],
         malechanneldata: {},
         femalechanneldata: {},
-        categorychanneldata: {}
+        categorychanneldata: {},
+        rankchanneldata: {}
       }
     },
     created () {
@@ -64,7 +65,12 @@
         let response = res.data
         if (response.errno === ERR_OK) {
           this.categorychanneldata = response.data
-          console.log(this.categorychanneldata)
+        }
+      })
+      this.$http.get('/api/rank').then(function (res) {
+        let response = res.data
+        if (response.errno === ERR_OK) {
+          this.rankchanneldata = response.data
         }
       })
     },
