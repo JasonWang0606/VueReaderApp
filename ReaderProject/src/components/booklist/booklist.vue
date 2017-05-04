@@ -19,6 +19,14 @@
           </a>
         </div>
       </li>
+      <li v-for="(item, index) in listdata" v-if="onlytitle && index>0 &&index<10">
+        <div class="book-h5__noimg">
+          <span class="book-h5__noimg-num">0{{index}}</span>
+          <div class="book-h5__noimg-info">
+            <p class="title">{{item.title}}</p>
+          </div>
+        </div>
+      </li>
     </ul>
   </div>
 </template>
@@ -34,6 +42,9 @@
         },
         shownum: {
           type: Number
+        },
+        onlytitle: {
+          type: Boolean
         }
       }
     }
@@ -124,5 +135,19 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+  }
+  .book-h5__noimg .book-h5__noimg-num{
+    float: left;
+    margin-top: 1px;
+    font: 13px/13px a;
+    color: rgba(237, 83,15,0.9);
+  }
+  .book-h5__noimg .book-h5__noimg-info{
+    margin-left: 27px;
+  }
+  .book-h5__noimg .book-h5__noimg-info .title{
+    font: 15px/15px a;
+    color: rgba(0, 0, 0, 0.9);
+    background: #fff;
   }
 </style>

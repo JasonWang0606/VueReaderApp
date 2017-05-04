@@ -36,6 +36,9 @@
     <div class="channel-title"><p class="title">本周最火</p></div>
     <booklist :listdata="hot" :serial="true" :shownum="5"></booklist>
     <split></split>
+    <div class="channel-title"><p class="title">重磅推荐</p><span class="title-sug">推</span></div>
+    <booklist :listdata="recomend" :serial="true" :shownum="1" :onlytitle="true"></booklist>
+    <split></split>
     <div class="channel-title"><p class="title">女生最爱</p></div>
     <booklist :listdata="femalelove" :serial="false" :shownum="shownum"></booklist>
     <div class="channel-footer">
@@ -50,6 +53,7 @@
       <router-link to="/male" class="more-btn">男生频道>></router-link>
     </div>
     <split></split>
+    <orangetitle :title="title"></orangetitle>
   </div>
 </template>
 
@@ -57,12 +61,16 @@
   import searchview from '../searchview/searchview.vue'
   import split from '../split/split.vue'
   import booklist from '../booklist/booklist.vue'
+  import orangetitle from '../orangetitle/orangetitle.vue'
 
   export default {
     data () {
       return {
         serial: false,
-        shownum: 3
+        shownum: 3,
+        title: {
+          ad_name: '限时免费'
+        }
       }
     },
     props: {
@@ -80,12 +88,16 @@
       },
       femalelove: {
         type: Array
+      },
+      recomend: {
+        type: Array
       }
     },
     components: {
       searchview,
       split,
-      booklist
+      booklist,
+      orangetitle
     }
   }
 </script>
@@ -115,12 +127,23 @@
     color: #333;
   }
   .home .channel-title{
+    position: relative;
     padding: 15px 13px 13px 14px;
     border-bottom: 1px solid #f0f0f0;
-    position: relative;
+    font-size: 0;
+  }
+  .home .channel-title .title-sug{
+    display: inline-block;
+    margin: -1px 0 0 5px;
+    padding: 3px 5px 0 5px;
+    font: 9px/9px a;
+    color: #fff;
+    background: #53ac7d;
+    border-radius: 1px;
   }
   .home .channel-title .title{
     position: relative;
+    display: inline-block;
     font: bold 13px/13px a;
     color: rbga(0, 0, 0, 0.9);
   }

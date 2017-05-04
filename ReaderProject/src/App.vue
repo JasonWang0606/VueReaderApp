@@ -13,7 +13,7 @@
       </div>
     </div>
     <keep-alive>
-      <router-view :homedata="homedata" :top="top" :hot="hot" :malelove="malelove" :femalelove="femalelove" :malechanneldata="malechanneldata" :femalechanneldata="femalechanneldata" :categorychanneldata="categorychanneldata" :rankchanneldata="rankchanneldata"></router-view>
+      <router-view :homedata="homedata" :top="top" :hot="hot" :malelove="malelove" :femalelove="femalelove" :malechanneldata="malechanneldata" :femalechanneldata="femalechanneldata" :categorychanneldata="categorychanneldata" :rankchanneldata="rankchanneldata" :recomend="recomend"></router-view>
     </keep-alive>
   </div>
 </template>
@@ -35,7 +35,8 @@
         malechanneldata: {},
         femalechanneldata: {},
         categorychanneldata: {},
-        rankchanneldata: {}
+        rankchanneldata: {},
+        recomend: []
       }
     },
     created () {
@@ -43,10 +44,11 @@
         let response = res.data
         if (response.errno === ERR_OK) {
           this.homedata = response.data
-          this.top = response.data.items[0].data.data[0]
-          this.hot = response.data.items[1].data.data
-          this.femalelove = response.data.items[3].data.data
-          this.malelove = response.data.items[4].data.data
+          this.top = this.homedata.items[0].data.data[0]
+          this.hot = this.homedata.items[1].data.data
+          this.femalelove = this.homedata.items[3].data.data
+          this.malelove = this.homedata.items[4].data.data
+          this.recomend = this.homedata.items[2].data.data
         }
       })
       this.$http.get('/api/male').then(function (res) {
